@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+{% if added_to_list == 0 %}
+<strong>Unable to add video to playlist.</strong>
+{% elif added_to_list == 1 %}
+<strong>Video added to wedding playlist.</strong>
+{% end %}
+{% if vidid != None %}
+Video uploaded: <a href="http://www.youtube.com/watch?v={{ vidid }}">http://www.youtube.com/watch?v={{ vidid }}</a>
+{% end %}<hr />
+To allow anyone to upload their videos and photos of Amber and Eric's wedding, we have decided to do things in 
+a unique and beneficial way.<br /><br />
+
+To upload a video please use the "Video Upload" form to select your video and upload it to YouTube.  This will also 
+automatically add the video to the "<a href="http://www.youtube.com/playlist?list=PL{{ plistid }}">Wedding</a>" playlist so they can 
+be viewed on the front page.<br /><br />
+
+Uploading a picture is done a little differently.  Send each picture as an attachment to <a href='mailto:amberericwedding@gmail.com'>amberericwedding@gmail.com</a> 
+and the pictures will be added every minute.  This was done to ease the pain of uploading multiple pictures and to make management of them simpler as well.<br /><br />
+
+If you have any questions feel free to email us at <a href="mailto:eric.carl.hansen@outlook.com">eric.carl.hansen@outlook.com</a>.
+
+<h2>Video Upload</h2>
+<form action="{{ token[0] }}?nexturl=https://67.149.33.186:1337/upload" method="post" enctype="multipart/form-data">
+<input name="file" type="file" />
+<input name="token" type="hidden" value="{{ token[1] }}" />
+<input value="Upload Video" type="submit" />
+</form>
+<h2>Picture Upload</h2>
+To upload a picture please send it as an attachment to <a href='mailto:amberericwedding@gmail.com'>amberericwedding@gmail.com</a>.
+{% end %}

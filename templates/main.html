@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row-fluid">
+    <div class="span4">
+        Space available: <strong>{{ avail }}</strong>%
+        <div class="progress">
+        {% if avail >= 80 %}
+        <div class="bar bar-success" style="width: {{ avail }}%;"></div>
+        {% elif avail >= 60 %}
+        <div class="bar bar-warning" style="width: {{ avail }}%;"></div>
+        {% else %}
+        <div class="bar bar-danger" style="width: {{ avail }}%;"></div>
+        {% end %}
+        </div>
+    </div>
+    <div class="span8">
+        View: <a href="#" id="sort-all">All</a> | <a href="#" id="sort-pics">Pictures</a> | <a href="#" id="sort-video">Video</a>
+        <hr />
+        Below is a list of pictures and videos that people from Amber and Eric Hansen's wedding have uploaded to share with others.<br /><br />
+        
+        If you took any pictures or videos yourself and would like to share them then please visit the <a href="/upload">upload page</a>.
+        
+        <div id="video">
+        <h3>Videos</h3>
+        A total of <strong>{{ len(videos) }}</strong> videos have been uploaded so far.  When videos are 
+        uploaded, they are stored on YouTube's server and placed in a playlist.  You can view the playlist 
+        yourself by <a href="http://www.youtube.com/playlist?list=PL{{ plistid }}" target="_blank">clicking here</a>.<br /><br />
+        
+        {% for video in videos %}
+        <a href="{{ video.GetHtmlLink().href }}" rel="prettyPhoto" class="video">
+            <img src="{{ video.media.thumbnail[0].url }}" alt="{{ video.title.text }}" width="128" height="128" />
+        </a>
+        {% end %}
+        </div>
+        <div id="photo">
+        <h3>Photos</h3>
+        {% for pic in pics %}
+        <a href="img/wedding/{{ pic }}" rel="prettyPhoto[wedding]" class="photo"><img src="img/wedding/{{ pic }}" width="128" height="128" /></a>
+        {% end %}
+        </div>
+    </div>
+</div>
+{% end %}
